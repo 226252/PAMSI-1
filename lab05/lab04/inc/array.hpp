@@ -40,12 +40,14 @@
 #include<iostream>
 #include"Interfaces/irunnable.hpp"
 #include"Interfaces/iquicksortable.hpp"
+#include"Interfaces/imergesortable.hpp"
+
 #include "IContainers/iarray.hpp"
 
 namespace stru                        //my namespace "STRUctures"
 {
   template <typename TYP>
-  class array : public stru::iarray<TYP>, public stru::irunnable, public stru::iquicksortable<TYP>{//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  class array : public stru::iarray<TYP>, public stru::irunnable, public imergesortable<TYP>, public stru::iquicksortable<TYP>{//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         
   private:   //DEFAULT PRIVATE SPECIFICATOR
 
@@ -77,6 +79,7 @@ namespace stru                        //my namespace "STRUctures"
     
     //specific methods for array:
     void push_back(TYP value,unsigned short int option=2);
+    void add(TYP value);
     void pop_back();
     void insert(unsigned int where,TYP what);
     void print()const;
@@ -187,6 +190,19 @@ namespace stru                        //my namespace "STRUctures"
 	allocate_to(option*capacity);
       }
     }
+    tab[n]=value;
+    n++;
+  }
+  //*************************************************//
+template <typename TYP>
+  void array<TYP>::add(TYP value){
+    if(!capacity){                       //If capacity equals 0
+      allocate_to(1);
+    }
+    if(capacity==n){
+      allocate_to(2*capacity);
+      }
+    
     tab[n]=value;
     n++;
   }

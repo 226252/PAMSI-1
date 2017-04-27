@@ -10,7 +10,6 @@
 #include"Interfaces/irunnable.hpp"
 #include"array.hpp"
 
-
 typedef std::chrono::high_resolution_clock Clock;   
 
 class timer{

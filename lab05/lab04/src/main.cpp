@@ -32,35 +32,35 @@
 #include<ctime>
 
 #include"../inc/array.hpp"
-// #include"../inc/array.cpp"
+#include"../inc/array.hpp"
 #include"../inc/timer.hpp"
 #include"../inc/Algorithms/mergesort.hpp"
 // #include"../inc/stack.hpp" 
 // #include "../inc/queue.hpp"
 // #include"../inc/list.hpp"
-// #include"../inc/Algorithms/quicksort.hpp"
+#include"../inc/Algorithms/quicksort.hpp"
 
 //*********************************************************//
 int main(int argc, char *argv[]){
 
   
   srand(time(NULL));
-/*
-  if(argc<3){
-    std::cerr<<"USE THIS PROGRAM:\n ./engine <FILENAME> <HOW MANY ELEMENTS> <OPTIONS>\n";
+
+  if(argc<2){
+    std::cerr<<"USE THIS PROGRAM:\n ./engine <file> <HOW MANY ELEMENTS>\n";
     exit(0);
   }
   
-  // std::ofstream datafile;                         //File stream declaration
+  std::ofstream datafile;                         //File stream declaration
   unsigned int elements= atoi(argv[2]);         //Number of elements
-  char  options=atoi(argv[3]);       //options for allocation
-  char options_run=*argv[4];
+  // char  options=atoi(argv[3]);       //options for allocation
+  // char options_run=*argv[4];
 
   timer STOPEREK;
   
   stru::array<int> tablica;
 
-  quicksort sortownik(tablica);
+  Mergesort sortownik(tablica);
 
 
   //Open file with name of first argument
@@ -69,30 +69,24 @@ int main(int argc, char *argv[]){
   if(datafile.is_open()){
 
     datafile<<"RANDOM:\n";
-    datafile<<STOPEREK.measure_time(sortownik, 1, elements, 'r','f')<<" Pivot first\n";    
-    datafile<<STOPEREK.measure_time(sortownik, 1, elements, 'r','l')<<" Pivot last\n";
-    datafile<<STOPEREK.measure_time(sortownik, 1, elements, 'r','m')<<" Pivot middle\n";
-    
+    datafile<<STOPEREK.measure_time(sortownik, 1, elements, 'r','f')<<endl;    
+
     datafile<<"INCREASING:\n";
-    datafile<<STOPEREK.measure_time(sortownik, 1, elements, 'i','f')<<" Pivot first\n";    
-    datafile<<STOPEREK.measure_time(sortownik, 1, elements, 'i','l')<<" Pivot last\n";
-    datafile<<STOPEREK.measure_time(sortownik, 1, elements, 'i','m')<<" Pivot middle\n";
-
+    datafile<<STOPEREK.measure_time(sortownik, 1, elements, 'i','f')<<endl;    
+  
     datafile<<"DECREASING:\n";
-    datafile<<STOPEREK.measure_time(sortownik, 1, elements, 'd','f')<<" Pivot first\n";    
-    datafile<<STOPEREK.measure_time(sortownik, 1, elements, 'd','l')<<" Pivot last\n";
-    datafile<<STOPEREK.measure_time(sortownik, 1, elements, 'd','m')<<" Pivot middle\n";
-           
+    datafile<<STOPEREK.measure_time(sortownik, 1, elements, 'd','f')<<endl;    
+              
   } 
-    */
-
+    
+/*
     stru::array<int> t;
     for(int i=0; i<10; i++){
       t.push_back(rand() % 100);  
     }
     mergesort(t,0, (t.get_size()-1));
     t.print();
-      
+  */    
   return 0;
     
 }
