@@ -46,18 +46,17 @@ int main(int argc, char *argv[]){
   
   srand(time(NULL));
 
-  if(argc<2){
-    std::cerr<<"USE THIS PROGRAM:\n ./engine <file> <HOW MANY ELEMENTS>\n";
+  if(argc<1){
+    std::cerr<<"USE THIS PROGRAM:\n ./engine <file>\n";
     exit(0);
   }
   
   std::ofstream datafile;                         //File stream declaration
-  unsigned int elements= atoi(argv[2]);         //Number of elements
+  // unsigned int elements= atoi(argv[2]);         //Number of elements
   // char  options=atoi(argv[3]);       //options for allocation
   // char options_run=*argv[4];
-
   timer STOPEREK;
-  
+  int elements[12]={100, 500, 1000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 700000, 1000000};
   stru::array<int> tablica;
 
   Mergesort sortownik(tablica);
@@ -68,15 +67,17 @@ int main(int argc, char *argv[]){
 
   if(datafile.is_open()){
 
-    datafile<<"RANDOM:\n";
-    datafile<<STOPEREK.measure_time(sortownik, 1, elements, 'r','f')<<endl;    
+    datafile<<"N:\t R\t I\t D\n";
+    for(int i=0; i<12; i++){
+      cout<<"Currently working with: " << elements[i] <<" elements\n";  
+      datafile<<elements[i]<<"\t";
+      datafile<<STOPEREK.measure_time(sortownik, 5, elements[i], 'r','f')<<"\t";;    
 
-    datafile<<"INCREASING:\n";
-    datafile<<STOPEREK.measure_time(sortownik, 1, elements, 'i','f')<<endl;    
-  
-    datafile<<"DECREASING:\n";
-    datafile<<STOPEREK.measure_time(sortownik, 1, elements, 'd','f')<<endl;    
-              
+      datafile<<STOPEREK.measure_time(sortownik, 5, elements[i], 'i','f')<<"\t";;    
+    
+      datafile<<STOPEREK.measure_time(sortownik, 5, elements[i], 'd','f')<<endl;    
+
+    }
   } 
     
 /*
@@ -86,7 +87,7 @@ int main(int argc, char *argv[]){
     }
     mergesort(t,0, (t.get_size()-1));
     t.print();
-  */    
+*/    
   return 0;
     
 }
